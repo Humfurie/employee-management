@@ -19,7 +19,7 @@ class Position extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function comments(): HasMany
+    public function positions(): HasMany
     {
         return $this->hasMany(Employee::class, 'employee_position');
     }
