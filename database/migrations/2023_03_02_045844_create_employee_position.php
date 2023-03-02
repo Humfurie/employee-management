@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->references('id')->on('employees')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('position_id')->references('id')->on('positions')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('flag')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -21,7 +21,7 @@ class Employee extends Model
    *
    * @return \Illuminate\Database\Eloquent\Relations\HasMany
    */
-  public function position(): HasMany
+  public function positions(): HasMany
   {
       return $this->hasMany(Position::class, 'employee_position');
   }
