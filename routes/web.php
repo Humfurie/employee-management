@@ -16,7 +16,7 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 Route::get('/', function () {
-    return view('admin.employee');
+    return view('admin.dashboard');
 });
 
 /**
@@ -39,10 +39,13 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
         Route::get('edit', [EmployeeController::class, 'edit'])
             ->name('edit');
 
-        Route::update('/', [EmployeeController::class, 'update'])
+        Route::put('/', [EmployeeController::class, 'update'])
             ->name('update');
 
-        Route::delete('/', [EmployeeController::class, 'delete'])
+        Route::put('/deFlag', [EmployeeController::class, 'deFlag'])
+            ->name('deFlag');
+
+        Route::delete('/', [EmployeeController::class, 'destroy'])
             ->name('delete');
     });
 });

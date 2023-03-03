@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Position extends Model
 {
@@ -14,13 +14,13 @@ class Position extends Model
         'position'
     ];
 
-    /**
-     * Get all of the comments for the Position
+   /**
+     * The roles that belong to the Employee
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function positions(): HasMany
+    public function employee(): BelongsToMany
     {
-        return $this->hasMany(Employee::class, 'employee_position');
+        return $this->belongsToMany(Position::class, 'employee_position');
     }
 }
