@@ -15,16 +15,14 @@ use Tabuna\Breadcrumbs\Trail;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+Route::get('/', [EmployeeController::class, 'index'])
+->name('index');
 
 /**
  * routes for admin
  */
 Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
-    Route::get('/', [EmployeeController::class, 'index'])
-        ->name('index');
+
 
     Route::get('create', [EmployeeController::class, 'create'])
         ->name('create');

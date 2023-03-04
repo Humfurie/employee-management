@@ -15,23 +15,33 @@
                 <th>
                     Position
                 </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-            </tr>
+            @foreach ($employee as $item)
+                <tr>
+                    <td>
+                        {{ $item->first_name }}
+                    </td>
+                    <td>
+                        {{ $item->middle_name }}
+                    </td>
+                    <td>
+                        {{ $item->last_name }}
+                    </td>
+                    <td>
+                        {{ $item->position }}
+                    </td>
+                    <td>
+                        <a href="{{ route('employee.show', ['employee' => $item->id]) }}">View</a>
+                        <a href="{{ route('employee.edit', ['employee' => $item->id]) }}">Edit</a>
+                        <a href="{{ route('employee.delete', ['employee' => $item->id]) }}">Delete</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
