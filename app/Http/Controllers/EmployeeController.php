@@ -14,8 +14,8 @@ class EmployeeController extends Controller
     {
         $employee = Employee::query()->where('flag', 1)->get();
 
-        // return view('admin.dashboard', compact('employee'));
-        return $employee;
+        return view('admin.dashboard', compact('employee'));
+        // return $employee;
     }
 
     public function show($id)
@@ -24,8 +24,8 @@ class EmployeeController extends Controller
         if(!$employee){
             return response()->json(['message' => 'user not found!']);
         }
-        // return view('admin.employee.index', compact('employee'));
-        return $employee;
+        return view('admin.employee.view', compact('employee'));
+        // return $employee;
     }
 
     public function create()

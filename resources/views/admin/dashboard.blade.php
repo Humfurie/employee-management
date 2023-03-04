@@ -2,6 +2,6 @@
 
 @section('content')
     <div>
-        <x-table />
+        <x-table :employee=$employee />
     </div>
 @endsection
