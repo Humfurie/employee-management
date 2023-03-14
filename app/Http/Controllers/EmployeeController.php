@@ -57,7 +57,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with('position')->find($id);
 
-        return view('admin.employee.edit', compact('$employee'));
+        return view('admin.employee.edit', compact('employee'));
     //     return $employee;
     }
 
