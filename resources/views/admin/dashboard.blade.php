@@ -5,7 +5,7 @@
         <x-slot name="header">
             Weclome
             <x-slot name="actions">
-                <button >Create</button>
+                <a href="{{route('employee.create')}}">Create</a>
             </x-slot>
         </x-slot>
         <x-slot name="body">

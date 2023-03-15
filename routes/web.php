@@ -27,11 +27,11 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
     Route::get('create', [EmployeeController::class, 'create'])
         ->name('create');
 
-    Route::post('/', [EmployeeController::class, 'store'])
+    Route::post('store', [EmployeeController::class, 'store'])
         ->name('store');
 
     Route::group(['prefix' => '{employee}'], function () {
-        Route::get('/', [EmployeeController::class, 'show'])
+        Route::get('show', [EmployeeController::class, 'show'])
             ->name('show');
 
         Route::get('edit', [EmployeeController::class, 'edit'])
@@ -40,7 +40,10 @@ Route::group(['prefix' => 'employee', 'as' => 'employee.'], function () {
         Route::put('/', [EmployeeController::class, 'update'])
             ->name('update');
 
-        Route::put('/deFlag', [EmployeeController::class, 'deFlag'])
+        Route::get('showDelete', [EmployeeController::class, 'showDelete'])
+        ->name('showDelete');
+
+        Route::put('deFlag', [EmployeeController::class, 'deFlag'])
             ->name('deFlag');
 
         Route::delete('/', [EmployeeController::class, 'destroy'])
