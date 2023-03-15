@@ -2,6 +2,11 @@
     @isset($header)
         <div class="card-header">
             {{ $header }}
+            @isset($actions)
+                <div class="card-header-actions">
+                    {{ $actions }}
+                </div>
+            @endisset
         </div>
     @endisset
 

@@ -4,6 +4,9 @@
     <x-card>
         <x-slot name="header">
             Weclome
+            <x-slot name="actions">
+                <button >Create</button>
+            </x-slot>
         </x-slot>
         <x-slot name="body">
             <x-table :employee="$employee" />

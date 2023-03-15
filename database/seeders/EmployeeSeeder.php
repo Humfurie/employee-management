@@ -14,6 +14,11 @@ class EmployeeSeeder extends Seeder
     public function run(): void
     {
         Employee::factory(10)->create();
-        Position::factory(3)->create();
+        $positions = Position::factory(3)->create();
+
+        Employee::all()->each(function ($employee) use ($positions){
+            $employee->position()->attach($positions->random(1, $positions->count())->pluck('id')->toArray());
+        });
+
     }
 }
