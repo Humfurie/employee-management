@@ -6,6 +6,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Position;
+use Carbon\Carbon;
 
 use function Ramsey\Uuid\v1;
 
@@ -79,6 +80,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::with('position')->where('flag', 1)->find($id);
         $employee->flag = 0;
+        $employee->deleted_at = Carbon::now()->toDateTimeString();
         $employee->update();
 
         return redirect()->route('index', $employee)->withFlashSuccess(__('Product Succesfully Deleted.'));
