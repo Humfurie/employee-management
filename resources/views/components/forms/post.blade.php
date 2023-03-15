@@ -1,4 +1,4 @@
-<form method="post" {{ $attributes->merge(['action' => '#', 'class' => 'form-horizontal']) }}>
+<form method="post">
     @csrf
     {{$slot}}
 </form>
