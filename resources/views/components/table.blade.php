@@ -33,12 +33,13 @@
                         {{ $item->last_name }}
                     </td>
                     <td>
-                        {{ $item->position }}
+
+                        {{ isset($item->position[0]) ? $item->position[0]->position : 'Pos 6'}}
                     </td>
                     <td>
                         <a href="{{ route('employee.show', ['employee' => $item->id]) }}">View</a>
                         <a href="{{ route('employee.edit', ['employee' => $item->id]) }}">Edit</a>
-                        <a href="{{ route('employee.delete', ['employee' => $item->id]) }}">Delete</a>
+                        <a href="{{ route('employee.showDelete', ['employee' => $item->id]) }}">Delete</a>
                     </td>
                 </tr>
             @endforeach

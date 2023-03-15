@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use App\Models\Position;
 
 use function Ramsey\Uuid\v1;
 
@@ -21,7 +22,7 @@ class EmployeeController extends Controller
     public function show($id)
     {
         $employee = Employee::with('position')->where('flag', 1)->find($id);
-        if(!$employee){
+        if (!$employee) {
             return response()->json(['message' => 'user not found!']);
         }
         return view('admin.employee.view', compact('employee'));
@@ -30,7 +31,8 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('admin.employee.create');
+        $positions = Position::query()->where('flag', 1)->get();
+        return view('admin.employee.create', compact('positions'));
     }
 
     public function store(Request $request)
@@ -46,10 +48,10 @@ class EmployeeController extends Controller
             return response()->json(['message' => $validator->errors()]);
         }
 
-        $employee = Employee::create($request->all);
+        $employee = Employee::create($request->all());
         $employee->position()->attach($request->position);
 
-        return view('admin.employee.index');
+        return view('admin.employee.view');
         // return $employee;
     }
 
@@ -58,22 +60,29 @@ class EmployeeController extends Controller
         $employee = Employee::with('position')->find($id);
 
         return view('admin.employee.edit', compact('employee'));
-    //     return $employee;
+        //     return $employee;
     }
 
     public function update($id)
     {
-
     }
 
+    public function showDelete($id)
+    {
+        $employee = Employee::with('position')->where('flag', 1)->find($id);
+        if (!$employee) {
+            return response()->json(['message' => 'user not found!']);
+        }
+        return view('admin.employee.delete', compact('employee'));
+    }
     public function deFlag($id)
     {
         $employee = Employee::with('position')->where('flag', 1)->find($id);
         $employee->flag = 0;
         $employee->update();
 
-        return redirect()->route('/', $employee)->withFlashSuccess(__('Product Succesfully Deleted.'));
-        // return $employee;
+        return redirect()->route('index', $employee)->withFlashSuccess(__('Product Succesfully Deleted.'));
+        return $employee;
     }
 
     public function destroy($id)

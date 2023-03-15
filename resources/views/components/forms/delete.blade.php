@@ -1,5 +1,5 @@
 <form method="post" {{ $attributes->merge(['action' => '#', 'class' => 'form-horizontal']) }}>
+    @method('delete')
     @csrf
-    @method('put')
     {{ $slot }}
 </form>
