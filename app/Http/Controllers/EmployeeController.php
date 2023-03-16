@@ -52,15 +52,20 @@ class EmployeeController extends Controller
         $employee = Employee::create($request->all());
         $employee->position()->attach($request->position);
 
-        return view('admin.employee.view');
+        return redirect()->route('employee.show', compact('employee'));
         // return $employee;
     }
 
     public function edit($id)
     {
-        $employee = Employee::with('position')->find($id);
+        $employee = Employee::with('position')->where('flag', 1)->find($id);
+        if (!$employee) {
+            return response()->json(['message' => 'user not found!']);
+        }
 
-        return view('admin.employee.edit', compact('employee'));
+        $positions = Position::query()->where('flag', 1)->get();
+
+        return view('admin.employee.edit', compact('employee', 'positions'));
         //     return $employee;
     }
 

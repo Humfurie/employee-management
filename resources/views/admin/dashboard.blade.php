@@ -4,8 +4,8 @@
     <x-card>
         <x-slot name="header">
             Weclome
-            <x-slot name="actions">
-                <a href="{{route('employee.create')}}">Create</a>
+            <x-slot name="actions" >
+                <a href="{{route('employee.create')}}" class="card-link">Create</a>
             </x-slot>
         </x-slot>
         <x-slot name="body">

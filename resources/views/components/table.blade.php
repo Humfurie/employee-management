@@ -34,7 +34,7 @@
                     </td>
                     <td>
 
-                        {{ isset($item->position[0]) ? $item->position[0]->position : 'Pos 6'}}
+                        {{ isset($item->position[0]) ? $item->position[0]->position : ''}}
                     </td>
                     <td>
                         <a href="{{ route('employee.show', ['employee' => $item->id]) }}">View</a>
