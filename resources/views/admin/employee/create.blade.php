@@ -4,6 +4,13 @@
     <x-forms.post :action="route('employee.store')">
         <x-card>
 
+            <x-slot name="header">
+                <h3>New Employee</h3>
+                <x-slot name="actions">
+                    <a href="{{ route('index') }}" class="card-link">Cancel</a>
+                </x-slot>
+            </x-slot>
+
             <x-slot name="body">
                 <div>
                     <label for="first_name">First Name</label>
@@ -19,6 +26,7 @@
                 </div>
                 <div>
                     <select name="position" id="position" class="form-control">
+                        <option value="" disabled selected>Select a position</option>
                         @foreach ($positions as $position)
                             <option value="{{ $position->id }}">{{ $position->position }}</option>
                         @endforeach
