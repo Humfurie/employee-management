@@ -3,19 +3,17 @@
 @section('content')
     <x-card>
         <x-slot name="header">
-            Weclome
+            Deleted Employees
             <x-slot name="actions">
+                <a href="{{ route('employee') }}" class="btn btn-dark">Back</a>
             </x-slot>
         </x-slot>
         <x-slot name="body">
-            <x-table.employee-table :employee="$employee" />
+            <x-table.deleted-employee :employee="$employee" />
         </x-slot>
         <x-slot name="footer">
             <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ route('employee.create') }}" class="btn btn-dark">Create</a>
-                    <a href="{{ route('employee.showTrash') }}" class="btn btn-dark">Deleted Employees</a>
-                </div>
+                <div></div>
                 <div>
                     {{ $employee->links() }}
                 </div>

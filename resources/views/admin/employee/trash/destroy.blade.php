@@ -1,13 +1,13 @@
 @extends('admin.layout.app')
 
 @section('content')
-    <x-forms.put :action="route('employee.softDelete', $employee)">
+    <x-forms.delete :action="route('employee.delete', $employee)">
         <x-card>
             <x-slot name="header">
-                <h3 class="card-text">Are You Sure You Want To Delete?</h3>
+                <h3 class="card-text">Delete Permanently?</h3>
 
                 <x-slot name="actions">
-                    <a href="{{ route('employee') }}" class="btn btn-dark">Cancel</a>
+                    <a href="{{ route('employee.showTrash') }}" class="btn btn-dark">Cancel</a>
                 </x-slot>
             </x-slot>
             <x-slot name="body">
@@ -33,5 +33,5 @@
                 <button type="submit" class="btn btn-danger">Delete</button>
             </x-slot>
         </x-card>
-    </x-forms.put>
+    </x-forms.delete>
 @endsection
