@@ -8,16 +8,16 @@
             </x-slot>
         </x-slot>
         <x-slot name="body">
-            <x-table.employee-table :employee="$employee" />
+            <x-table.positions-table :positions="$positions" />
         </x-slot>
         <x-slot name="footer">
             <div class="d-flex justify-content-between">
                 <div>
-                    <a href="{{ route('employee.create') }}" class="btn btn-dark">Create</a>
-                    <a href="{{ route('employee.showTrash') }}" class="btn btn-dark">Deleted Employees</a>
+                    <a href="{{ route('position.create') }}" class="btn btn-dark">Create</a>
+                    <a href="{{ route('position.showTrash') }}" class="btn btn-dark">Deleted Positions</a>
                 </div>
                 <div>
-                    {{ $employee->links() }}
+                    {{ $positions->links() }}
                 </div>
             </div>
         </x-slot>
