@@ -1,25 +1,21 @@
-@extends('admin.layout.app')
-
-@section('content')
-    <x-card>
-        <x-slot name="header">
-            Weclome
-            <x-slot name="actions">
-            </x-slot>
-        </x-slot>
-        <x-slot name="body">
-            <x-table.positions-table :positions="$positions" />
-        </x-slot>
-        <x-slot name="footer">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <a href="{{ route('position.create') }}" class="btn btn-dark">Create</a>
-                    <a href="{{ route('position.showTrash') }}" class="btn btn-dark">Deleted Positions</a>
-                </div>
-                <div>
-                    {{ $positions->links() }}
-                </div>
+<x-app-layout>
+    <x-slot name="header">
+        Weclome
+        <div name="actions">
+        </div>
+    </x-slot>
+    <div name="body">
+        <x-table.positions-table :positions="$positions" />
+    </div>
+    <div name="footer">
+        <div class="d-flex justify-content-between">
+            <div>
+                <a href="{{ route('position.create') }}" class="btn btn-dark">Create</a>
+                <a href="{{ route('position.showTrash') }}" class="btn btn-dark">Deleted Positions</a>
             </div>
-        </x-slot>
-    </x-card>
-@endsection
+            <div>
+                {{ $positions->links() }}
+            </div>
+        </div>
+    </div>
+</x-app-layout>

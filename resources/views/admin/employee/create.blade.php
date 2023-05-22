@@ -1,16 +1,13 @@
-@extends('admin.layout.app')
-
-@section('content')
+<x-app-layout>
     <x-forms.post :action="route('employee.store')">
-        <x-card>
             <x-slot name="header">
                 <h3 class="card-title">New Employee</h3>
-                <x-slot name="actions">
+                <div name="actions">
                     <a href="{{ route('employee') }}" class="btn btn-dark">Cancel</a>
-                </x-slot>
+                </div>
             </x-slot>
-            
-            <x-slot name="body">
+
+            <div name="body">
                 <div class="card-body d-flex justify-content-evenly">
                     <div>
                         <label for="first_name" class="card-text">First Name</label>
@@ -35,11 +32,10 @@
                     </div>
                 </div>
 
-            </x-slot>
+            </div>
 
-            <x-slot name="footer">
+            <div name="footer">
                 <button type="submit" class="btn btn-primary">Save</button>
-            </x-slot>
-        </x-card>
+            </div>
     </x-forms.post>
-@endsection
+</x-app-layout>

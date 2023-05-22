@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table-auto">
     <thead>
         <tr>
             <th scope="col">
