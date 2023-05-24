@@ -19,23 +19,31 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($employee as $item)
+        @foreach ($employees as $employee)
             <tr>
+                {{-- <td>
+                   {{ $employee}}
+                </td> --}}
                 <td>
-                    {{ $item->first_name }}
+                    {{ $employee->first_name }}
                 </td>
                 <td>
-                    {{ $item->middle_name }}
+                    {{ $employee->middle_name }}
                 </td>
                 <td>
-                    {{ $item->last_name }}
+                    {{ $employee->last_name }}
                 </td>
                 <td>
-                    {{ isset($item->position[0]) ? $item->position[0]->position : '' }}
+                    {{ isset($employee->position) ? $employee->position->position : '' }}
                 </td>
                 <td>
-                    <a href="{{ route('employee.showRestore', ['employee' => $item->id]) }}" class="btn btn-primary">Restore</a>
-                    <a href="{{ route('employee.permaDelete', ['employee' => $item->id]) }}"
+                    <form action="{{ route('employee.restore', ['employee' => $employee->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit">Restore</button>
+                        </form>
+
+                    <a href="{{ route('employee.forceDelete', ['employee' => $employee->id]) }}"
                         class="btn btn-danger">Delete</a>
                 </td>
             </tr>

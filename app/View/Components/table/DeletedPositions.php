@@ -17,6 +17,7 @@ class DeletedPositions extends Component
     {
         $this->positions = $positions;
     }
+
     /**
      * Get the view / contents that represent the component.
      */

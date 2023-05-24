@@ -1,5 +1,6 @@
 <x-app-layout>
-    <x-forms.put :action="route('employee.softDelete', $employee)">
+
+    <x-forms.put :action="route('employee.softDelete', $employee->id)">
 
         <x-slot name="header">
             <h3 class="card-text">Are You Sure You Want To Delete?</h3>
@@ -23,7 +24,7 @@
             </div>
             <div>
                 <h5>Position</h5>
-                {{ isset($employee->position[0]) ? $employee->position[0]->position : '' }}
+                {{ isset($employee->position) ? $employee->position->position : '' }}
             </div>
         </div>
 

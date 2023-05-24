@@ -2,11 +2,11 @@
     <x-forms.put :action="route('employee.update', $employee)">
         <x-slot name="header">
             <h3>Update Employee</h3>
+        </x-slot>
+        <div name="body">
             <div name="actions">
                 <a href="{{ route('employee') }}" class="btn btn-dark">Cancel</a>
             </div>
-        </x-slot>
-        <div name="body">
             <div class="card-body d-flex justify-content-evenly">
                 <div>
                     <label for="first_name">First Name</label>
@@ -21,11 +21,11 @@
                     <input type="text" name="last_name" value="{{ $employee->last_name }}" required>
                 </div>
                 <div>
-                    <label for="position">Position</label>
-                    <select name="position" id="position" class="form-control" required>
+                    <label for="position_id">Position</label>
+                    <select name="position_id" class="form-control" required>
                         @foreach ($positions as $position)
                             <option value="{{ $position->id }}"
-                                {{ $employee->position[0]->id == $position->id ? 'selected' : '' }}>
+                                {{ $employee->position->id == $position->id ? 'selected' : '' }}>
                                 {{ $position->position }}</option>
                         @endforeach
                     </select>

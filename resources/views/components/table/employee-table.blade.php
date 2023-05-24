@@ -1,3 +1,9 @@
+<div>
+    <form action="{{ route('employee') }}" method="get">
+        <input type="text" name="search" id="search" placeholder="Search">
+        {{-- <button type="submit">Search</button> --}}
+    </form>
+</div>
 <table class="table-auto">
     <thead>
         <tr>
@@ -19,24 +25,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($employee as $item)
+        @foreach ($employees as $employee)
             <tr>
                 <td>
-                    {{ $item->first_name }}
+                    {{ $employee->first_name }}
                 </td>
                 <td>
-                    {{ $item->middle_name }}
+                    {{ $employee->middle_name }}
                 </td>
                 <td>
-                    {{ $item->last_name }}
+                    {{ $employee->last_name }}
                 </td>
                 <td>
-                    {{ isset($item->position[0]) ? $item->position[0]->position : '' }}
+                    {{ isset($employee->position[0]) ? $employee->position[0]->position : '' }}
                 </td>
                 <td>
-                    <a href="{{ route('employee.show', ['employee' => $item->id]) }}" class="btn btn-primary">View</a>
-                    <a href="{{ route('employee.edit', ['employee' => $item->id]) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route('employee.showDelete', ['employee' => $item->id]) }}"
+                    <a href="{{ route('employee.show', ['employee' => $employee->id]) }}"
+                        class="btn btn-primary">View</a>
+                    <a href="{{ route('employee.edit', ['employee' => $employee->id]) }}"
+                        class="btn btn-warning">Edit</a>
+                    <a href="{{ route('employee.showDelete', ['employee' => $employee->id]) }}"
                         class="btn btn-danger">Delete</a>
                 </td>
             </tr>

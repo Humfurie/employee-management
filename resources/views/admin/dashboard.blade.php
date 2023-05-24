@@ -5,16 +5,17 @@
         </div>
     </x-slot>
     <div name="body">
-        <x-table.employee-table :employee="$employee" />
+        {{-- {{$employees}} --}}
+        <x-table.employee-table :employees="$employees" />
     </div>
     <div name="footer">
         <div class="d-flex justify-content-between">
             <div>
                 <a href="{{ route('employee.create') }}" class="btn btn-dark">Create</a>
-                <a href="{{ route('employee.showTrash') }}" class="btn btn-dark">Deleted Employees</a>
+                <a href="{{ route('employee.showTrashed') }}" class="btn btn-dark">Deleted Employees</a>
             </div>
             <div>
-                {{ $employee->links() }}
+                {{ $employees->links() }}
             </div>
         </div>
     </div>

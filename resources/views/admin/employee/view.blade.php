@@ -30,7 +30,7 @@
                 <div>
                     <h5 class="card-title">Position</h5>
                     <p class="card-text">
-                        {{ isset($employee->position[0]) ? $employee->position[0]->position : '' }}
+                        {{ isset($employee->position) ? $employee->position->position : '' }}
                     </p>
                 </div>
             </div>

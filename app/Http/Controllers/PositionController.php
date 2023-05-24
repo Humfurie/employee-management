@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Position;
+use Carbon\Carbon;
+use Domain\Position\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
 
 class PositionController extends Controller
 {
     public function index()
     {
         $positions = Position::query()->where('flag', 1)->paginate(5);
+
         return view('admin.position', compact('positions'));
     }
 
     public function show($id)
     {
         $positions = Position::query()->where('flag', 1)->find($id);
+
         return view('admin.position.view', compact('positions'));
     }
 
@@ -29,7 +31,7 @@ class PositionController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'position' => 'required'
+            'position' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -37,6 +39,7 @@ class PositionController extends Controller
         }
 
         $positions = Position::create($request->all());
+
         return redirect()->route('position.show', ['position' => $positions->id]);
     }
 
@@ -44,7 +47,7 @@ class PositionController extends Controller
     {
         $positions = Position::query()->where('flag', 1)->find($id);
 
-        if (!$positions) {
+        if (! $positions) {
             return response()->json(['message' => 'Position not found!']);
         }
 
@@ -54,7 +57,7 @@ class PositionController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'position' => 'required'
+            'position' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -62,20 +65,22 @@ class PositionController extends Controller
         }
 
         $positions = Position::query()->where('flag', 1)->find($id);
-        if (!$positions) {
+        if (! $positions) {
             return response()->json(['message' => 'Position not found!']);
         }
 
         $positions->update($request->all());
+
         return redirect()->route('position.show', $positions);
     }
 
     public function showDelete($id)
     {
         $positions = Position::query()->where('flag', 1)->find($id);
-        if (!$positions) {
+        if (! $positions) {
             return response()->json(['message' => 'Position not found!']);
         }
+
         return view('admin.position.delete', compact('positions'));
     }
 
@@ -89,19 +94,20 @@ class PositionController extends Controller
         return redirect()->route('position', $positions);
     }
 
-    
     public function showTrash()
     {
         $positions = Position::query()->where('flag', 0)->paginate(5);
+
         return view('admin.position.trash.table', compact('positions'));
     }
 
     public function showRestore($id)
     {
         $positions = Position::query()->where('flag', 0)->find($id);
+
         return view('admin.position.trash.restore', compact('positions'));
     }
-    
+
     public function restore($id)
     {
         $positions = Position::query()->where('flag', 0)->find($id);
@@ -114,15 +120,17 @@ class PositionController extends Controller
     public function permaDelete($id)
     {
         $positions = Position::query()->where('flag', 0)->find($id);
-        if (!$positions) {
+        if (! $positions) {
             return response()->json(['message' => 'Position not found!']);
         }
+
         return view('admin.position.trash.destroy', compact('positions'));
     }
+
     public function destroy($id)
     {
         $positions = Position::query()->where('flag', 0)->find($id);
-        if (!$positions) {
+        if (! $positions) {
             return response()->json(['message' => 'Position not found!']);
         }
 

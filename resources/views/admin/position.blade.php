@@ -11,7 +11,7 @@
         <div class="d-flex justify-content-between">
             <div>
                 <a href="{{ route('position.create') }}" class="btn btn-dark">Create</a>
-                <a href="{{ route('position.showTrash') }}" class="btn btn-dark">Deleted Positions</a>
+                <a href="{{ route('position.showTrashed') }}" class="btn btn-dark">Deleted Positions</a>
             </div>
             <div>
                 {{ $positions->links() }}
