@@ -6,7 +6,7 @@
             <x-slot name="header">
                 <h3>Restore Position?</h3>
                 <x-slot name="actions">
-                    <a href="{{ route('position') }}" class="btn btn-dark" >Cancel</a>
+                    <a href="{{ route('position.showTrash') }}" class="btn btn-dark" >Cancel</a>
                 </x-slot>
             </x-slot>
 

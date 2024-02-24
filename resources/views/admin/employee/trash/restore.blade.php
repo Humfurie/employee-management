@@ -7,7 +7,7 @@
                 <h3 class="card-text">Restore Employee?</h3>
 
                 <x-slot name="actions">
-                    <a href="{{ route('employee') }}" class="btn btn-dark">Cancel</a>
+                    <a href="{{ route('employee.showTrash') }}" class="btn btn-dark">Cancel</a>
                 </x-slot>
             </x-slot>
             <x-slot name="body">

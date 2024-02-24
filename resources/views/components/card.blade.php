@@ -1,24 +1,21 @@
-<div class="card">
+<div class="flex flex-col w-full">
     @isset($header)
-        <div class="card-header">
-            {{ $header }}
-            @isset($actions)
-                <div class="card-header-actions">
+        <header class="bg-white dark:bg-gray-800 shadow">
+            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                {{ $header }}
+            </div>
+        </header>
+        @isset($actions)
+            <div class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $actions }}
                 </div>
-            @endisset
-        </div>
+            </div>
+        @endisset
     @endisset
-
     @isset($body)
-        <div class="card-body">
+        <div>
             {{ $body }}
-        </div>
-    @endisset
-
-    @isset($footer)
-        <div class="card-footer">
-            {{ $footer }}
         </div>
     @endisset
 </div>

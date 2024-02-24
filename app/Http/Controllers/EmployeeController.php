@@ -16,7 +16,7 @@ class EmployeeController extends Controller
     {
         $employee = Employee::query()->where('flag', 1)->paginate(10);
 
-        return view('admin.dashboard', compact('employee'));
+        return view('admin.employee', compact('employee'));
         // return $employee;
     }
 

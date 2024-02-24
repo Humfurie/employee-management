@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,10 +12,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Model::unguard();
-
+//         \App\Models\User::factory()->create([
+//             'name' => 'Humphrey',
+//             'email' => 'Humfurie@gmail.com',
+//             'password' => 'Humfurie'
+//         ]);
         $this->call(EmployeeSeeder::class);
-
-        Model::reguard();
     }
 }
