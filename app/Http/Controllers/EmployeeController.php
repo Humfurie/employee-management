@@ -2,37 +2,45 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use App\Models\Position;
 use Carbon\Carbon;
-
-use function Ramsey\Uuid\v1;
+use Domain\Employee\Models\Employee;
+use Domain\Position\Models\Position;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EmployeeController extends Controller
 {
     public function index()
     {
-        $employee = Employee::query()->where('flag', 1)->paginate(10);
+        // dd(request('search'));
+        if (request('search')) {
+            $employees = Employee::where('first_name', 'like', '%' . request('search') . '%')
+                ->orWhere('middle_name', 'like', '%' . request('search') . '%')
+                ->orWhere('last_name', 'like', '%' . request('search') . '%')
+                ->paginate(10);
+        } else {
+            $employees = Employee::query()->paginate(10);
+        }
+        // $employees = Employee::query()->paginate(10);
 
-        return view('admin.employee', compact('employee'));
+        return view('admin.employee', compact('employees'));
         // return $employee;
     }
 
-    public function show($id)
+    public function show(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 1)->find($id);
-        if (!$employee) {
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
+
         return view('admin.employee.view', compact('employee'));
         // return $employee;
     }
 
     public function create()
     {
-        $positions = Position::query()->where('flag', 1)->get();
+        $positions = Position::query()->get();
+
         return view('admin.employee.create', compact('positions'));
     }
 
@@ -56,36 +64,33 @@ class EmployeeController extends Controller
         // return $employee;
     }
 
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 1)->find($id);
-        if (!$employee) {
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
 
-        $positions = Position::query()->where('flag', 1)->get();
+        $positions = Position::query()->get();
 
         return view('admin.employee.edit', compact('employee', 'positions'));
         //     return $employee;
     }
 
-    public function update(Request $request, $id)
-    {
-
+    public function update(Request $request, Employee $employee)
+    {;
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'position' => 'required'
+            'position_id' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()]);
         }
 
-        $employee = Employee::with('position')->where('flag', 1)->find($id);
 
-        if (!$employee) {
+        if (! $employee) {
             return response()->json(['message' => 'There is no such Employee'], 404);
         }
 
@@ -95,66 +100,70 @@ class EmployeeController extends Controller
         return redirect()->route('employee.show', $employee);
     }
 
-    public function showDelete($id)
+    public function showDelete(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 1)->find($id);
-        if (!$employee) {
+
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
         return view('admin.employee.delete', compact('employee'));
     }
-    public function softDelete($id)
+
+    public function softDelete(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 1)->find($id);
-        $employee->flag = 0;
-        $employee->deleted_at = Carbon::now()->toDateTimeString();
-        $employee->update();
+        $employee->delete();
 
         return redirect()->route('employee', $employee);
     }
 
-    
-    public function showTrash()
+    public function showTrashed()
     {
-        $employee = Employee::query()->where('flag', 0)->paginate(10);
-        
-        return view('admin.employee.trash.table', compact('employee'));
+        $employees = Employee::query()->onlyTrashed()->paginate(10);
+
+        return view('admin.employee.trash.table', compact('employees'));
     }
 
-    public function showRestore($id)
+    public function showRestore(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 0)->find($id);
-        if (!$employee) {
+
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
+
         return view('admin.employee.trash.restore', compact('employee'));
     }
-    
-    public function restore($id)
-    {
-        $employee = Employee::with('position')->where('flag', 0)->find($id);
-        $employee->flag = 1;
-        $employee->update();
 
-        return redirect()->route('employee', $employee);
+    public function restore(Employee $employee)
+    {
+
+
+        $employee->restore();
+
+        return redirect()->route('employee');
+
+
+        // return redirect()->route('employee');
+        // return view('admin.dashboard');
     }
 
-    public function permaDelete($id)
+    public function showForceDelete(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 0)->find($id);
-        if (!$employee) {
+        $employee = Employee::with('position')->onlyTrashed()->find($employee);
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
+
         return view('admin.employee.trash.destroy', compact('employee'));
     }
 
-    public function destroy($id)
+    public function forceDelete(Employee $employee)
     {
-        $employee = Employee::with('position')->where('flag', 0)->find($id);
-        if (!$employee) {
+        $employee = Employee::with('position')->onlyTrashed()->find($employee);
+        if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
-        $employee->delete();
+        $employee->forceDelete();
+
         return redirect()->route('employee.showTrash');
     }
 }

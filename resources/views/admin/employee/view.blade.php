@@ -1,16 +1,13 @@
-@extends('admin.layout.app')
-
-@section('content')
-    <x-card>
+<x-app-layout>
         <x-slot name="header">
             <div class="card-body d-flex justify-content-evenly">
                 <h3>Employee Information</h3>
-                <x-slot name="actions">
+                <div name="actions">
                     <a href="{{ route('employee') }}" class="btn btn-dark">Back</a>
-                </x-slot>
+                </div>
             </div>
         </x-slot>
-        <x-slot name="body">
+        <div name="body">
             <div class="card-body d-flex justify-content-evenly">
                 <div>
                     <h5 class="card-title">First Name</h5>
@@ -33,14 +30,13 @@
                 <div>
                     <h5 class="card-title">Position</h5>
                     <p class="card-text">
-                        {{ isset($employee->position[0]) ? $employee->position[0]->position : '' }}
+                        {{ isset($employee->position) ? $employee->position->position : '' }}
                     </p>
                 </div>
             </div>
-        </x-slot>
+        </div>
 
-        <x-slot name="footer">
+        <div name="footer">
             <a href="{{ route('employee.edit', $employee->id) }}" class="btn btn-warning">Edit</a>
-        </x-slot>
-    </x-card>
-@endsection
+        </div>
+</x-app-layout>

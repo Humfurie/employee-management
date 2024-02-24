@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('content')
-    <x-forms.put :action="route('employee.restore', $employee)">
+    <x-forms.put :action="route('employee.restore', $employee->id)">
         <x-card>
             <x-slot name="header">
                 <h3 class="card-text">Restore Employee?</h3>

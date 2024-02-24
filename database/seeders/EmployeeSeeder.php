@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Employee;
-use App\Models\Position;
+use Database\Factories\EmployeeFactory;
 use Illuminate\Database\Seeder;
 
 class EmployeeSeeder extends Seeder
@@ -13,12 +12,8 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        Employee::factory(10)->create();
-        $positions = Position::factory(3)->create();
 
-        Employee::all()->each(function ($employee) use ($positions){
-            $employee->position()->attach($positions->random(1, $positions->count())->pluck('id')->toArray());
-        });
+        EmployeeFactory::new()->count(20)->create();
 
     }
 }

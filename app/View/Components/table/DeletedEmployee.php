@@ -8,15 +8,15 @@ use Illuminate\View\Component;
 
 class DeletedEmployee extends Component
 {
-    public $employee;
+    public $employees;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($employee)
+    public function __construct($employees)
     {
-        $this->employee = $employee;
- 
+        $this->employees = $employees;
+
     }
 
     /**

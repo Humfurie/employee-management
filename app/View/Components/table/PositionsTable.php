@@ -11,7 +11,6 @@ class PositionsTable extends Component
     /**
      * Create a new component instance.
      */
-
     public $positions;
 
     public function __construct($positions)

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Domain\Position\Models\Position;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PositionFactory extends Factory
 {
+    protected $model = Position::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +19,7 @@ class PositionFactory extends Factory
     public function definition(): array
     {
         return [
-            'position' => $this->faker->word(),
+            'position' => $this->faker->jobTitle,
         ];
     }
 }
