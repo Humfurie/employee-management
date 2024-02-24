@@ -23,7 +23,7 @@ class EmployeeController extends Controller
         }
         // $employees = Employee::query()->paginate(10);
 
-        return view('admin.dashboard', compact('employees'));
+        return view('admin.employee', compact('employees'));
         // return $employee;
     }
 
@@ -50,7 +50,7 @@ class EmployeeController extends Controller
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'position' => 'required',
+            'position' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -95,6 +95,7 @@ class EmployeeController extends Controller
         }
 
         $employee->update($request->all());
+        $employee->position()->sync($request->position);
 
         return redirect()->route('employee.show', $employee);
     }
@@ -105,7 +106,6 @@ class EmployeeController extends Controller
         if (! $employee) {
             return response()->json(['message' => 'user not found!']);
         }
-
         return view('admin.employee.delete', compact('employee'));
     }
 
@@ -165,10 +165,5 @@ class EmployeeController extends Controller
         $employee->forceDelete();
 
         return redirect()->route('employee.showTrash');
-    }
-
-    public function myFunc(Employee $employee)
-    {
-        return 'Hello world';
     }
 }

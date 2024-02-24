@@ -1,49 +1,41 @@
-<table class="table-auto">
-    <thead>
-        <tr>
-            <th scope="col">
+<table class="table-fixed w-full">
+    <thead class="table-header-group">
+        <tr class="table-row">
+            <th class="table-cell text-left">
                 First Name
             </th>
-            <th scope="col">
+            <th class="table-cell text-left">
                 Middle Name
             </th>
-            <th scope="col">
+            <th class="table-cell text-left">
                 Last Name
             </th>
-            <th scope="col">
+            <th class="table-cell text-left">
                 Position
             </th>
-            <th scope="col">
+            <th class="table-cell text-left">
                 Actions
             </th>
         </tr>
     </thead>
-    <tbody>
-        @foreach ($employees as $employee)
-            <tr>
-                {{-- <td>
-                   {{ $employee}}
-                </td> --}}
-                <td>
-                    {{ $employee->first_name }}
+    <tbody class="table-row-group">
+        @foreach ($employee as $item)
+            <tr class="table-row">
+                <td class="table-cell">
+                    {{ $item->first_name }}
                 </td>
-                <td>
-                    {{ $employee->middle_name }}
+                <td class="table-cell">
+                    {{ $item->middle_name }}
                 </td>
-                <td>
-                    {{ $employee->last_name }}
+                <td class="table-cell">
+                    {{ $item->last_name }}
                 </td>
-                <td>
-                    {{ isset($employee->position) ? $employee->position->position : '' }}
+                <td class="table-cell">
+                    {{ isset($item->position[0]) ? $item->position[0]->position : '' }}
                 </td>
-                <td>
-                    <form action="{{ route('employee.restore', ['employee' => $employee->id]) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <button type="submit">Restore</button>
-                        </form>
-
-                    <a href="{{ route('employee.forceDelete', ['employee' => $employee->id]) }}"
+                <td class="table-cell">
+                    <a href="{{ route('employee.showRestore', ['employee' => $item->id]) }}" class="btn btn-primary">Restore</a>
+                    <a href="{{ route('employee.permaDelete', ['employee' => $item->id]) }}"
                         class="btn btn-danger">Delete</a>
                 </td>
             </tr>
